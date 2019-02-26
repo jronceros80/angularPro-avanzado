@@ -22,6 +22,21 @@
     <button (click)="submitAddTimer()">Ok</button>
   </app-alert-view>
   
+  <!-- ngTemplate -->
+  <ng-template #timeEndTemplate let-message let-title="title">
+    <app-simple-alert-view
+      [title] = "title"
+      [message] = "message">
+    </app-simple-alert-view>
+  </ng-template>
+
+  <ng-container [ngTemplateOutlet]="timeEndTemplate"
+  [ngTemplateOutletContext] = "{title: 'Game over', $implicit: 'timer ended'}"></ng-container>
+  <ng-container [ngTemplateOutlet]="timeEndTemplate"></ng-container>
+  <ng-container [ngTemplateOutlet]="timeEndTemplate"></ng-container>
+  <ng-container [ngTemplateOutlet]="timeEndTemplate"></ng-container>
+
+  <!-- Componente dinamico -->
   <ng-container #alert></ng-container>
   
 </div>

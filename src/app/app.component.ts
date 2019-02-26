@@ -9,22 +9,22 @@ import { SimpleAlertViewComponent } from "app/simple-alert-view/simple-alert-vie
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterContentInit, AfterViewInit {
-  public isAddTimerVisible:boolean = false;
-  public time:number = 0;
-  public timers:Array<number> = [];
-  public simpleAlert:ComponentRef<SimpleAlertViewComponent> = null;
+  public isAddTimerVisible = false;
+  public time = 0;
+  public timers: Array<number> = [];
+  public simpleAlert: ComponentRef<SimpleAlertViewComponent> = null;
 
-  @ViewChild("timerInput") timeInput: ElementRef;
-  @ViewChild("alert", {read:ViewContainerRef}) alertContainer: ViewContainerRef;
+  @ViewChild('timerInput') timeInput: ElementRef;
+  @ViewChild('alert', {read: ViewContainerRef}) alertContainer: ViewContainerRef;
 
-  constructor(private renderer: Renderer2, private resolver: ComponentFactoryResolver) { 
+  constructor(private renderer: Renderer2, private resolver: ComponentFactoryResolver) {
     this.timers = [3, 20, 185];
   }
 
   ngAfterViewInit(){
     console.log(this.timeInput);
 
-    this.renderer.setAttribute(this.timeInput.nativeElement, "placeholder", "enter seconds");
+    this.renderer.setAttribute(this.timeInput.nativeElement, 'placeholder', 'enter seconds');
     this.renderer.addClass(this.timeInput.nativeElement, 'time-in');
   }
 
@@ -32,7 +32,7 @@ export class AppComponent implements AfterContentInit, AfterViewInit {
   }
 
   logCountdownEnd(){
-    console.log("the countdown has finished");
+    console.log('the countdown has finished');
   }
 
   public showAddTimer(){
@@ -46,12 +46,13 @@ export class AppComponent implements AfterContentInit, AfterViewInit {
     this.isAddTimerVisible = false;
   }
 
+  // Muestra componente dinamico
   public showEndTimerAlert(){
     const alertFactory = this.resolver.resolveComponentFactory(SimpleAlertViewComponent);
     this.simpleAlert = this.alertContainer.createComponent(alertFactory);
-    this.simpleAlert.instance.title = "timer ended";
-    this.simpleAlert.instance.message = "your countdown has finished";
-    this.simpleAlert.instance.onDismiss.subscribe(()=>{
+    this.simpleAlert.instance.title = 'timer ended';
+    this.simpleAlert.instance.message = 'your countdown has finished';
+    this.simpleAlert.instance.onDismiss.subscribe(() => {
       this.simpleAlert.destroy();
     });
 
